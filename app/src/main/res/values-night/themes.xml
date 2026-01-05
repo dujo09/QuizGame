@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Dark palette (inline hex values) with increased contrast for buttons -->
+    <style name="Base.Theme.QuizGame" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- Primary (brighter mint so buttons stand out) -->
+        <item name="colorPrimary">#2EE6A9</item>
+        <item name="colorOnPrimary">#002916</item>
+        <item name="colorPrimaryContainer">#04412C</item>
+        <item name="colorOnPrimaryContainer">#DFFCF3</item>
+
+        <!-- Secondary (warm amber) -->
+        <item name="colorSecondary">#FFC857</item>
+        <item name="colorOnSecondary">#3D2200</item>
+        <item name="colorSecondaryContainer">#5A3A00</item>
+        <item name="colorOnSecondaryContainer">#FFF3D1</item>
+
+        <!-- Tertiary (soft purple) -->
+        <item name="colorTertiary">#C086FC</item>
+        <item name="colorOnTertiary">#2C0030</item>
+
+        <!-- Background / surface: slightly lighter than before for better contrast -->
+        <item name="android:colorBackground">#181C1B</item>
+        <item name="colorOnBackground">#DEFFFFFF</item> <!-- 87% white -->
+        <item name="colorSurface">#1E2624</item>
+        <item name="colorOnSurface">#DEFFFFFF</item>   <!-- 87% white -->
+        <item name="colorSurfaceVariant">#25302E</item>
+        <item name="colorOnSurfaceVariant">#BFD7CC</item>
+
+        <!-- Error -->
+        <item name="colorError">#FF6B6B</item>
+        <item name="colorOnError">#3A0000</item>
+        <item name="colorErrorContainer">#5A1E1E</item>
+        <item name="colorOnErrorContainer">#FFECEC</item>
+
+        <!-- Misc -->
+        <item name="colorOutline">#7FC0A6</item>
+        <item name="colorSurfaceInverse">#EEF8F5</item>
+        <item name="colorOnSurfaceInverse">#03120C</item>
+
+        <!-- Text colors with material-like alpha levels for dark theme -->
+        <item name="android:textColorPrimary">#DEFFFFFF</item>   <!-- 87% white -->
+        <item name="android:textColorSecondary">#99FFFFFF</item> <!-- 60% white -->
+        <!-- Hint/helper: muted amber so helper text reads but doesn't fight the accent -->
+        <item name="android:textColorHint">#66FFC857</item>      <!-- ~40% of #FFC857 -->
+
+        <!-- Widget / control tints so components inherit accent automatically -->
+        <item name="colorControlActivated">#2EE6A9</item>
+        <item name="colorControlHighlight">#332EE6A9</item> <!-- translucent highlight -->
+        <item name="colorControlNormal">#CFEFE6</item>
+
+        <!-- ensure ripple & focus states show nicely on dark surfaces -->
+        <item name="android:colorForeground">#DEFFFFFF</item>
+
+        <!-- Material button fallback (Material3 buttons will pick colorPrimary / colorOnPrimary) -->
+        <item name="materialButtonStyle">@style/Widget.Material3.Button</item>
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless</item>
+
+        <!-- Keep Material3 typography defaults -->
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Material3.HeadlineSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Material3.BodyLarge</item>
+    </style>
+
+</resources>

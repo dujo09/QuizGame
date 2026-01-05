@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="30dp"
+    android:paddingTop="40dp"
+    android:paddingBottom="60dp">
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0 🌟"
+        android:textAlignment="viewEnd"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        android:textColor="?attr/colorSecondary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/textViewQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Question?"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonA"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Answer A"
+            android:textColor="?attr/colorOnSurface"
+            app:strokeColor="?attr/colorTertiary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonB"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Answer B"
+            android:textColor="?attr/colorOnSurface"
+            app:strokeColor="?attr/colorTertiary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonC"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Answer C"
+            android:textColor="?attr/colorOnSurface"
+            app:strokeColor="?attr/colorTertiary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonD"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Answer D"
+            android:textColor="?attr/colorOnSurface"
+            app:strokeColor="?attr/colorTertiary" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCorrect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="Correct!"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        android:textColor="?attr/colorPrimary"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvIncorrect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="Incorrect!"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        android:textColor="?attr/colorError"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Error"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorError" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonNext"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:text="Next" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonFinish"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:text="Finish"
+        android:visibility="gone" />
+
+</LinearLayout>
