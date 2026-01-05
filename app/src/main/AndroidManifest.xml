@@ -24,6 +24,9 @@
             android:name="com.soss.quizgame.view.LoginActivity"
             android:exported="true" />
         <activity
+            android:name="com.soss.quizgame.view.HistoryActivity"
+            android:exported="true" />
+        <activity
             android:name="com.soss.quizgame.view.RegisterActivity"
             android:exported="true" />
         <activity

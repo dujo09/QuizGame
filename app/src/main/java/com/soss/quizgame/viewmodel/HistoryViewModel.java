@@ -2,18 +2,16 @@ package com.soss.quizgame.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.soss.quizgame.model.User;
+
 import com.soss.quizgame.model.UserGame;
 import com.soss.quizgame.repository.UserGameRepository;
 import java.util.List;
-import java.util.Objects;
 
-public class MainViewModel extends ViewModel {
+public class HistoryViewModel extends ViewModel {
   private final LiveData<List<UserGame>> userGamesLiveData;
   private UserGameRepository userGameRepo;
 
-  public MainViewModel() {
+  public HistoryViewModel() {
     userGameRepo = new UserGameRepository();
     userGamesLiveData = userGameRepo.getUserGameLiveData();
   }

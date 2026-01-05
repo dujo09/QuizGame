@@ -17,6 +17,7 @@ public class QuizViewModel extends ViewModel {
   private final MutableLiveData<List<Question>> questionsLiveData;
   private final MediatorLiveData<Question> currentQuestion = new MediatorLiveData<>();
   private final MutableLiveData<Integer> currentIndex = new MutableLiveData<>(0);
+  private boolean areAllQuestionsCorrect = true;
   private boolean isQuizFinished = false;
   private int score = 0;
 
@@ -62,16 +63,16 @@ public class QuizViewModel extends ViewModel {
     if (question == null) {
       return false;
     }
+    List<Question> questions = questionsLiveData.getValue();
+    Integer idx = currentIndex.getValue();
+    if (questions != null && idx != null && idx >= questions.size() - 1) {
+      isQuizFinished = true;
+    }
     if (selectedOption == question.correctOptionIndex) {
-      score++;
-      List<Question> questions = questionsLiveData.getValue();
-      Integer idx = currentIndex.getValue();
-      if (questions != null && idx != null && idx >= questions.size() - 1) {
-        isQuizFinished = true;
-      }
+      score += 100;
       return true;
     } else {
-      isQuizFinished = true;
+      areAllQuestionsCorrect = false;
       return false;
     }
   }
@@ -79,6 +80,10 @@ public class QuizViewModel extends ViewModel {
   public void nextQuestion() {
     int idx = currentIndex.getValue() == null ? 0 : currentIndex.getValue();
     currentIndex.setValue(idx + 1);
+  }
+
+  public boolean areAllQuestionsCorrect() {
+    return areAllQuestionsCorrect;
   }
 
   public boolean isQuizFinished() {

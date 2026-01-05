@@ -1,7 +1,9 @@
 package com.soss.quizgame.view;
 
 import static android.view.View.GONE;
+import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static android.widget.Toast.LENGTH_SHORT;
 
 import android.os.Bundle;
 import android.widget.*;
@@ -11,8 +13,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.soss.quizgame.R;
 import com.soss.quizgame.model.Question;
 import com.soss.quizgame.model.UserGame;
-import com.soss.quizgame.repository.QuizRepository;
-import com.soss.quizgame.repository.UserGameRepository;
 import com.soss.quizgame.viewmodel.QuizViewModel;
 
 import java.time.LocalDateTime;
@@ -24,8 +24,8 @@ public class QuizActivity extends ComponentActivity {
   private TextView textQuestion;
   private Button[] optionButtons = new Button[4];
   private Button finishButton, nextButton;
-  private TextView tvCorrect, tvIncorrect, tvScore, tvError;
-  private int[] optionIds = {R.id.buttonA, R.id.buttonB, R.id.buttonC, R.id.buttonD};
+  private TextView tvScore, tvError;
+  private int[] optionIds = {R.id.buttonA, R.id.buttonB, R.id.buttonC};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +44,8 @@ public class QuizActivity extends ComponentActivity {
     nextButton.setOnClickListener(v -> quizViewModel.nextQuestion());
     nextButton.setEnabled(false);
 
-    tvCorrect = findViewById(R.id.tvCorrect);
-    tvCorrect.setVisibility(GONE);
-
-    tvIncorrect = findViewById(R.id.tvIncorrect);
-    tvIncorrect.setVisibility(GONE);
-
     textQuestion = findViewById(R.id.textViewQuestion);
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 3; i++) {
       optionButtons[i] = findViewById(optionIds[i]);
       final int idx = i;
       optionButtons[i].setOnClickListener(v -> onAnswerSelected(idx));
@@ -75,20 +69,16 @@ public class QuizActivity extends ComponentActivity {
 
   private void showQuestion(Question question) {
     nextButton.setEnabled(false);
-    tvIncorrect.setVisibility(GONE);
-    tvCorrect.setVisibility(GONE);
 
     if (question != null) {
       optionButtons[0].setEnabled(true);
       optionButtons[1].setEnabled(true);
       optionButtons[2].setEnabled(true);
-      optionButtons[3].setEnabled(true);
 
       textQuestion.setText(question.questionText);
       optionButtons[0].setText(question.options.get(0));
       optionButtons[1].setText(question.options.get(1));
       optionButtons[2].setText(question.options.get(2));
-      optionButtons[3].setText(question.options.get(3));
     }
   }
 
@@ -96,15 +86,14 @@ public class QuizActivity extends ComponentActivity {
     optionButtons[0].setEnabled(false);
     optionButtons[1].setEnabled(false);
     optionButtons[2].setEnabled(false);
-    optionButtons[3].setEnabled(false);
 
     boolean isCorrect = quizViewModel.answerCurrentQuestion(selectedIdx);
 
     if (isCorrect) {
-      tvCorrect.setVisibility(VISIBLE);
-      tvScore.setText(quizViewModel.getScore() + " \uD83C\uDF1F");
+      Toast.makeText(this, "TOČNO!", LENGTH_SHORT).show();
+      tvScore.setText(quizViewModel.getScore() + " poena");
     } else {
-      tvIncorrect.setVisibility(VISIBLE);
+      Toast.makeText(this, "NETOČNO!", LENGTH_SHORT).show();
     }
 
     if (quizViewModel.isQuizFinished()) {
@@ -121,11 +110,10 @@ public class QuizActivity extends ComponentActivity {
     quizViewModel.updateHighScore(uid, finalScore);
 
     LocalDateTime now = LocalDateTime.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    UserGame userGame = new UserGame(uid, finalScore, now.format(formatter));
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E HH:mm:ss");
+    UserGame userGame = new UserGame(uid, finalScore, now.format(formatter), quizViewModel.areAllQuestionsCorrect());
     quizViewModel.addUserGame(userGame);
 
-    Toast.makeText(this, "Quiz over! Score: " + finalScore, Toast.LENGTH_LONG).show();
     finish();
   }
 }

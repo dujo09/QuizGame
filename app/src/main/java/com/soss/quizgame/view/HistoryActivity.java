@@ -11,28 +11,32 @@ import com.soss.quizgame.R;
 import com.soss.quizgame.viewmodel.AuthViewModelShared;
 import com.soss.quizgame.viewmodel.HistoryViewModel;
 
-public class MainActivity extends ComponentActivity {
-  private static final String TAG = "MainActivity";
+public class HistoryActivity extends ComponentActivity {
+  private static final String TAG = "HistoryActivity";
+  private HistoryViewModel historyViewModel;
   private AuthViewModelShared authViewModelShared;
-  private Button buttonPlay, buttonLogout, btnHistory;
-  private TextView tvUser, tvError;
+  private RecyclerView rvHistory;
+  private HistoryAdapter adapter;
+  private Button buttonPlay;
+  private TextView tvError;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_history);
 
-    buttonLogout = findViewById(R.id.btnLogout);
-    btnHistory = findViewById(R.id.btnHistory);
-
-    tvUser = findViewById(R.id.tvUser);
     tvError = findViewById(R.id.tvError);
     tvError.setText("");
 
     buttonPlay = findViewById(R.id.buttonPlay);
+    rvHistory = findViewById(R.id.rvHistory);
+    rvHistory.setLayoutManager(new LinearLayoutManager(this));
+
+    historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
+    adapter = new HistoryAdapter();
+    rvHistory.setAdapter(adapter);
 
     authViewModelShared = new ViewModelProvider(this).get(AuthViewModelShared.class);
-
     authViewModelShared
         .getUser()
         .observe(
@@ -42,17 +46,27 @@ public class MainActivity extends ComponentActivity {
                 Intent i = new Intent(this, LoginActivity.class);
                 startActivity(i);
               } else {
-                tvUser.setText(user.username);
+                historyViewModel.fetchUserGames(user.uid);
               }
             });
 
-    buttonLogout.setOnClickListener(v -> authViewModelShared.signOut());
+    historyViewModel
+        .getUserGames()
+        .observe(
+            this,
+            userGames -> {
+              if (userGames != null) adapter.submitList(userGames);
+            });
+    historyViewModel
+        .getError()
+        .observe(
+            this,
+            error -> {
+              if (error != null && !error.isEmpty()) tvError.setText(error);
+            });
     buttonPlay.setOnClickListener(
         v -> {
           startActivity(new Intent(this, QuizActivity.class));
         });
-    btnHistory.setOnClickListener(v -> {
-        startActivity(new Intent(this, HistoryActivity.class));
-    });
   }
 }

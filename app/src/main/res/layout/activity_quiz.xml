@@ -12,7 +12,7 @@
         android:id="@+id/tvScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0 🌟"
+        android:text="0 poena"
         android:textAlignment="viewEnd"
         android:textAppearance="?attr/textAppearanceTitleMedium"
         android:textColor="?attr/colorSecondary" />
@@ -35,66 +35,41 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonA"
-            style="?attr/materialButtonOutlinedStyle"
+            style="?attr/materialButtonTonalStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            app:cornerRadius="0dp"
             android:text="Answer A"
             android:textColor="?attr/colorOnSurface"
             app:strokeColor="?attr/colorTertiary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonB"
-            style="?attr/materialButtonOutlinedStyle"
+            style="?attr/materialButtonTonalStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            app:cornerRadius="0dp"
             android:text="Answer B"
+            android:layout_weight="1"
             android:textColor="?attr/colorOnSurface"
             app:strokeColor="?attr/colorTertiary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonC"
-            style="?attr/materialButtonOutlinedStyle"
+            style="?attr/materialButtonTonalStyle"
+            app:cornerRadius="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_weight="1"
             android:text="Answer C"
             android:textColor="?attr/colorOnSurface"
             app:strokeColor="?attr/colorTertiary" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonD"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Answer D"
-            android:textColor="?attr/colorOnSurface"
-            app:strokeColor="?attr/colorTertiary" />
-
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvCorrect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:text="Correct!"
-        android:textAppearance="?attr/textAppearanceTitleLarge"
-        android:textColor="?attr/colorPrimary"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/tvIncorrect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:text="Incorrect!"
-        android:textAppearance="?attr/textAppearanceTitleLarge"
-        android:textColor="?attr/colorError"
-        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvError"

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.soss.quizgame.R;
 import com.soss.quizgame.model.UserGame;
 
-public class UserGameAdapter extends ListAdapter<UserGame, UserGameAdapter.UserGameVH> {
+public class HistoryAdapter extends ListAdapter<UserGame, HistoryAdapter.UserGameVH> {
 
   private static final DiffUtil.ItemCallback<UserGame> DIFF_CALLBACK =
       new DiffUtil.ItemCallback<UserGame>() {
@@ -25,19 +25,19 @@ public class UserGameAdapter extends ListAdapter<UserGame, UserGameAdapter.UserG
         public boolean areContentsTheSame(@NonNull UserGame oldItem, @NonNull UserGame newItem) {
           return oldItem.uid.equals(newItem.uid)
               && oldItem.score == newItem.score
+              && oldItem.isAllCorrect == newItem.isAllCorrect
               && oldItem.timestamp.equals(newItem.timestamp);
         }
       };
 
-  public UserGameAdapter() {
+  public HistoryAdapter() {
     super(DIFF_CALLBACK);
   }
 
   @NonNull
   @Override
   public UserGameVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    View v =
-        LayoutInflater.from(parent.getContext()).inflate(R.layout.row_user_games, parent, false);
+    View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_history, parent, false);
     return new UserGameVH(v);
   }
 
@@ -52,17 +52,23 @@ public class UserGameAdapter extends ListAdapter<UserGame, UserGameAdapter.UserG
   }
 
   public class UserGameVH extends RecyclerView.ViewHolder {
-    TextView tvScore, tvTimestamp;
+    TextView tvScore, tvTimestamp, tvAllCorrect;
 
     UserGameVH(@NonNull View itemView) {
       super(itemView);
       tvScore = itemView.findViewById(R.id.tvScore);
       tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
+      tvAllCorrect = itemView.findViewById(R.id.tvIsAllCorrect);
     }
 
     void bind(UserGame userGame) {
-      tvScore.setText(userGame.score + " \uD83C\uDF1F");
+      tvScore.setText(userGame.score + " poena");
       tvTimestamp.setText(userGame.timestamp);
+      if (userGame.isAllCorrect) {
+        tvAllCorrect.setText("Sve točno");
+      } else {
+        tvAllCorrect.setText("");
+      }
     }
   }
 }
