@@ -30,6 +30,7 @@ public class UserGameRepository {
                 Log.i(TAG, "fetchUserGames: " + e);
                 return;
               }
+              error.postValue("");
               List<UserGame> userGames = new ArrayList<>();
               for (QueryDocumentSnapshot doc : snapshots) {
                 UserGame userGame = doc.toObject(UserGame.class);
