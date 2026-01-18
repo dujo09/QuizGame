@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "723031049560",
-    "project_id": "quizgame-787d0",
-    "storage_bucket": "quizgame-787d0.firebasestorage.app"
+    "project_number": "354411641377",
+    "project_id": "mobilneseminar",
+    "storage_bucket": "mobilneseminar.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:723031049560:android:b0ce81e543b52923bd112d",
+        "mobilesdk_app_id": "1:354411641377:android:a72d23fee06c589253c160",
         "android_client_info": {
           "package_name": "com.soss.quizgame"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBc1xIzRUw7DTohgXc_a9NvriRvK1M5a-M"
+          "current_key": "AIzaSyDbgT7XFY_Qo4a52F3_cS-iyiGIw5ZQFoE"
         }
       ],
       "services": {
