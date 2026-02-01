@@ -19,11 +19,11 @@ public class AuthRepository {
   private final MutableLiveData<User> userLive = new MutableLiveData<>();
   private final MutableLiveData<String> error = new MutableLiveData<>();
   private final SharedPreferences prefs;
-  private FirebaseAuth mAuth;
+  private FirebaseAuth firebaseAuth;
   private FirebaseFirestore db;
 
   public AuthRepository(Context context) {
-    mAuth = FirebaseAuth.getInstance();
+    firebaseAuth = FirebaseAuth.getInstance();
     db = FirebaseFirestore.getInstance();
     prefs = context.getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
     String json = prefs.getString(KEY_USER, null);
@@ -46,11 +46,11 @@ public class AuthRepository {
 
   public MutableLiveData<FirebaseUser> signUp(String username, String email, String password) {
     MutableLiveData<FirebaseUser> result = new MutableLiveData<>();
-    mAuth
+    firebaseAuth
         .createUserWithEmailAndPassword(email, password)
         .addOnSuccessListener(
             authResult -> {
-              FirebaseUser fbUser = mAuth.getCurrentUser();
+              FirebaseUser fbUser = firebaseAuth.getCurrentUser();
               if (fbUser != null) {
                 String uid = fbUser.getUid();
                 User user = new User(uid, username, email, 0);
@@ -70,11 +70,11 @@ public class AuthRepository {
 
   public MutableLiveData<FirebaseUser> signIn(String email, String password) {
     MutableLiveData<FirebaseUser> result = new MutableLiveData<>();
-    mAuth
+    firebaseAuth
         .signInWithEmailAndPassword(email, password)
         .addOnSuccessListener(
             authResult -> {
-              FirebaseUser firebaseUser = mAuth.getCurrentUser();
+              FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
               result.postValue(firebaseUser);
               cacheUser(firebaseUser);
             })
@@ -88,7 +88,7 @@ public class AuthRepository {
   }
 
   public void signOut() {
-    mAuth.signOut();
+    firebaseAuth.signOut();
     clearCache();
   }
 
@@ -115,7 +115,7 @@ public class AuthRepository {
               }
 
               userLive.postValue(u);
-              saveToPrefs(u);
+                saveToPrefs(u);
             })
         .addOnFailureListener(e -> Log.w(TAG, "refresh failed", e));
   }

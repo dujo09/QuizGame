@@ -26,7 +26,6 @@ public class QuizRepository {
                 Question q = doc.toObject(Question.class);
                 list.add(q);
               }
-              Log.i(TAG, "fetchQuestions: " + list);
               Collections.shuffle(list);
               questionsLiveData.postValue(list);
             })
