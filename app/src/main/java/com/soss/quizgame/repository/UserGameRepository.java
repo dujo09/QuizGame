@@ -40,6 +40,28 @@ public class UserGameRepository {
             });
   }
 
+  public void fetchUserTopResults(String userId) {
+    Log.i(TAG, "fetchUserTopResults: " + userId);
+    db.collection("user_games")
+        .whereEqualTo("uid", userId)
+        .addSnapshotListener(
+            (snapshots, e) -> {
+              if (e != null) {
+                error.postValue(e.getMessage());
+                Log.i(TAG, "fetchUserTopResults: " + e);
+                return;
+              }
+              error.postValue("");
+              List<UserGame> userGames = new ArrayList<>();
+              for (QueryDocumentSnapshot doc : snapshots) {
+                UserGame userGame = doc.toObject(UserGame.class);
+                userGames.add(userGame);
+              }
+              userGames.sort((a, b) -> Integer.compare(b.score, a.score));
+              userGameLiveData.postValue(userGames);
+            });
+  }
+
   public void addUserGame(UserGame userGame) {
     db.collection("user_games").add(userGame).addOnFailureListener(e -> {
         error.postValue(e.getMessage());

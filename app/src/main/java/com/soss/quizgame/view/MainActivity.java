@@ -21,7 +21,7 @@ public class MainActivity extends ComponentActivity {
   private AuthViewModelShared authViewModelShared;
   private RecyclerView recyclerLeaderboard;
   private UserGameAdapter adapter;
-  private Button buttonPlay, buttonLogout;
+  private Button buttonPlay, buttonLogout, buttonTopResults;
   private TextView tvUser, tvError;
 
   @Override
@@ -36,6 +36,7 @@ public class MainActivity extends ComponentActivity {
     tvError.setText("");
 
     buttonPlay = findViewById(R.id.buttonPlay);
+    buttonTopResults = findViewById(R.id.buttonTopResults);
     recyclerLeaderboard = findViewById(R.id.recyclerLeaderboard);
     recyclerLeaderboard.setLayoutManager(new LinearLayoutManager(this));
 
@@ -80,6 +81,11 @@ public class MainActivity extends ComponentActivity {
     buttonPlay.setOnClickListener(
         v -> {
           startActivity(new Intent(MainActivity.this, QuizActivity.class));
+        });
+
+    buttonTopResults.setOnClickListener(
+        v -> {
+          startActivity(new Intent(MainActivity.this, TopResultsActivity.class));
         });
   }
 }

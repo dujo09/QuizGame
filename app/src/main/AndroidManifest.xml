@@ -29,6 +29,9 @@
         <activity
             android:name="com.soss.quizgame.view.QuizActivity"
             android:exported="true" />
+        <activity
+            android:name="com.soss.quizgame.view.TopResultsActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
